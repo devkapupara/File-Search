@@ -12,7 +12,7 @@ def RfileSearch(pathlist):
 
 def getSearchOption():
     
-    interest = input("Enter A to search for all files or any one of N (search by name), E (search by extension), T followed by search line that you want to find in the files, < or > (< for filesize less than and > filesize greater than: ").split()
+    interest = input("Enter option: ").split()
     valid_input = ['N','E','<','>']
     
     if (interest[0] == 'T'):
@@ -31,7 +31,7 @@ def getSearchOption():
 
 def getPaths():
     
-    pathTd = input("Enter path to directory followed by D for directory search or R for recursive search through subfolders: ").split()
+    pathTd = input("Enter option: ").split()
     
     while ((len(pathTd) != 2) or (not Path(pathTd[1]).exists())):
         print("ERROR")
@@ -108,7 +108,7 @@ def requiredFiles(interest, files):
 
 def getAction():
 
-    action = input("Enter F to search for first line, D to create duplicate or T to modify timestamp of the search results: ")
+    action = input("Enter option: ")
     while ((action != 'F') and (action != 'D') and (action != 'T')):
         print ("ERROR")
         action = input("Enter again: ")
