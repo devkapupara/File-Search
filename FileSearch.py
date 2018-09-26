@@ -11,32 +11,32 @@ def RfileSearch(pathlist):
             return RfileSearch(list(pathlist[0].iterdir())) + RfileSearch(pathlist[1:])
 
 def getSearchOption():
-    
-    interest = input("Enter option: ").split()
+
+    interest = input("Enter option (N,E,<,> followed by name, extension or size): ").split()
     valid_input = ['N','E','<','>']
-    
+
     if (interest[0] == 'T'):
         while(interest[0] == 'T' and len(interest) < 2):
             print("ERROR")
             interest = input("Enter again: ").split()
-        nInterest = list(map(str, interest[1:])) 
+        nInterest = list(map(str, interest[1:]))
         interest = [interest[0], ' '.join(nInterest)]
-        
+
     elif (interest[0] != 'A' or interest[0] != 'T'):
         while (len(interest) != 2 or interest[0] not in valid_input):
             print("ERROR")
             interest = input("").split()
-    
+
     return interest
 
 def getPaths():
-    
-    pathTd = input("Enter option: ").split()
-    
+
+    pathTd = input("Enter mode and path (R/D <path>): ").split()
+
     while ((len(pathTd) != 2) or (not Path(pathTd[1]).exists())):
         print("ERROR")
         pathTd = input("Enter again: ").split()
-        
+
     (mode, path) = (pathTd[0],Path(pathTd[1]))
 
     if mode == "D":
@@ -46,11 +46,11 @@ def getPaths():
         files.sort(key = lambda x: str(x).count("/"))
 
     final_files = []
-    
+
     for i in files:
         if str(i).split('/')[-1][0] != '.':
             final_files.append(i)
-            
+
     return final_files
 
 def requiredFiles(interest, files):
@@ -76,7 +76,7 @@ def requiredFiles(interest, files):
 
     elif interest[0] == 'T':
         interest[1] = str(interest[1])
-        
+
         for i in files:
             try:
                 infile = i.open('r')
@@ -114,13 +114,10 @@ def getAction():
         action = input("Enter again: ")
 
     return action
-        
+
 def main():
 
     files = getPaths()
-
-    for i in files:
-        print (i)
 
     interest = getSearchOption()
 
@@ -157,21 +154,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-        
-                    
-    
-        
-
-    
-
-    
-
-            
-                    
-                
-            
-
-    
-    
-    
-    
